@@ -8,17 +8,17 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #2c2416;
+    background: #d6cfc2;
     background-image:
       repeating-linear-gradient(
         90deg,
         transparent,
         transparent 18px,
-        rgba(0,0,0,0.04) 18px,
-        rgba(0,0,0,0.04) 20px
+        rgba(0,0,0,0.03) 18px,
+        rgba(0,0,0,0.03) 20px
       ),
-      linear-gradient(180deg, #2c2416 0%, #33291b 50%, #2a2214 100%);
-    color: #e8dcc8;
+      linear-gradient(180deg, #d6cfc2 0%, #cec7ba 50%, #d2cbbf 100%);
+    color: #4a4035;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,29 +39,30 @@
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    color: #d4c4a0;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    color: #5a4e40;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.3);
   }
   .settings-btn {
     position: absolute;
     right: 0;
     background: none;
     border: none;
-    padding: 6px;
-    font-size: 1.3rem;
-    color: #9a8a6c;
+    padding: 8px;
+    font-size: 1.8rem;
+    color: #8a7e6c;
     cursor: pointer;
     transition: all 0.15s;
     line-height: 1;
   }
-  .settings-btn:hover { color: #d4c4a0; background: none; }
+  .settings-btn:hover { color: #5a4e40; background: none; }
 
   .info-bar {
     display: flex;
     gap: 20px;
+    align-items: center;
     margin-bottom: 14px;
     font-size: 0.85rem;
-    color: #9a8a6c;
+    color: #8a7e6c;
     font-weight: 400;
   }
 
@@ -75,11 +76,17 @@
   .side-left {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
     padding-top: 4px;
+    width: 100px;
   }
-  .side-left button {
-    width: 90px;
+  .diff-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .diff-section button {
+    width: 100%;
     padding: 8px 0;
     border-radius: 6px;
     font-size: 0.8rem;
@@ -90,16 +97,50 @@
     text-align: center;
     border-width: 1.5px;
     border-style: solid;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.3);
   }
-  .diff-easy { border-color: #5a9a3e; color: #7bc462; }
+  .diff-easy { border-color: #5a9a3e; color: #3d7a28; }
   .diff-easy:hover, .diff-easy.active { background: #5a9a3e; color: #fff; }
-  .diff-medium { border-color: #b8872e; color: #daa54a; }
+  .diff-medium { border-color: #b8872e; color: #906a1e; }
   .diff-medium:hover, .diff-medium.active { background: #b8872e; color: #fff; }
-  .diff-hard { border-color: #b84a3e; color: #e06050; }
+  .diff-hard { border-color: #b84a3e; color: #983830; }
   .diff-hard:hover, .diff-hard.active { background: #b84a3e; color: #fff; }
-  .diff-expert { border-color: #7a50a8; color: #a878d0; }
+  .diff-expert { border-color: #7a50a8; color: #604088; }
   .diff-expert:hover, .diff-expert.active { background: #7a50a8; color: #fff; }
+
+  /* Puzzle grid */
+  .puzzle-grid-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8a7e6c;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+  }
+  .puzzle-box {
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    border: 1.5px solid #b0a590;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all 0.12s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    font-weight: 600;
+    color: #8a7e6c;
+  }
+  .puzzle-box:hover { border-color: #8a7450; background: rgba(255,255,255,0.6); }
+  .puzzle-box.active { border-color: #6a5a40; background: #e8dcc6; box-shadow: inset 0 0 0 1px #6a5a40; }
+  .puzzle-box.completed { background: #7ab862; border-color: #5a9a3e; color: #fff; }
+  .puzzle-box.completed.active { background: #5a9a3e; border-color: #3d7a28; box-shadow: inset 0 0 0 1px #3d7a28; }
 
   /* Center */
   .center-col {
@@ -112,15 +153,15 @@
   .board {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    border: 2.5px solid #8a7450;
+    border: 2.5px solid #a89478;
     border-radius: 4px;
     width: 450px;
     height: 450px;
-    background: #8a7450;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+    background: #a89478;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.08);
   }
   .cell {
-    background: #3d3222;
+    background: #f0e6d6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,25 +169,27 @@
     font-weight: 500;
     cursor: pointer;
     transition: background 0.1s;
-    border-right: 1px solid #5a4a34;
-    border-bottom: 1px solid #5a4a34;
+    border-right: 1px solid #c8b89a;
+    border-bottom: 1px solid #c8b89a;
     user-select: none;
   }
   .cell:nth-child(9n) { border-right: none; }
   .cell:nth-child(n+73) { border-bottom: none; }
-  .cell:nth-child(3n):not(:nth-child(9n)) { border-right: 2.5px solid #8a7450; }
-  .cell:nth-child(n+19):nth-child(-n+27) { border-bottom: 2.5px solid #8a7450; }
-  .cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2.5px solid #8a7450; }
+  .cell:nth-child(3n):not(:nth-child(9n)) { border-right: 2.5px solid #a89478; }
+  .cell:nth-child(n+19):nth-child(-n+27) { border-bottom: 2.5px solid #a89478; }
+  .cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2.5px solid #a89478; }
 
-  .cell:hover { background: #4a3d2c; }
-  .cell.selected { background: #5a4830 !important; box-shadow: inset 0 0 0 2px #b89860; }
-  .cell.highlighted { background: #443828; }
-  .cell.same-number { background: #504028; }
-  .cell.given { color: #d4c4a0; }
-  .cell.user-entered { color: #a89470; }
-  .cell.wrong { color: #d45040 !important; animation: shake 0.4s ease; }
+  .cell:hover { background: #e4d8c4; }
+  .cell.selected { background: #d8c8a8 !important; box-shadow: inset 0 0 0 2px #a89060; }
+  .cell.highlighted { background: #e8dcc6; }
+  .cell.same-number { background: #ddd0b4; }
+  .cell.given { color: #2c2416; }
+  .cell.user-entered { color: #5a4830; }
+  .cell.wrong { color: #c03020 !important; animation: shake 0.4s ease; }
   .cell.hint-cell { animation: hintPulse 1.5s ease; }
-  .cell.drag-over { background: #5a4830 !important; box-shadow: inset 0 0 0 2px #b89860; }
+  .cell.hint-preview { animation: hintBlink 1.2s ease-in-out infinite; }
+  .cell.hint-preview .hint-value { animation: hintTextBlink 1.2s ease-in-out infinite; }
+  .cell.drag-over { background: #d8c8a8 !important; box-shadow: inset 0 0 0 2px #a89060; }
   .cell.note-mode-cell .notes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -157,7 +200,7 @@
   }
   .cell .notes span {
     font-size: 0.5rem;
-    color: #7a6a50;
+    color: #9a8a6c;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,15 +224,16 @@
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background: #3d3222;
-    border: 1.5px solid #6a5a40;
-    color: #d4c4a0;
+    background: #e8dcc8;
+    border: 1.5px solid #b0a590;
+    color: #4a4035;
     cursor: grab;
     transition: all 0.12s;
   }
-  .number-pad button:hover { background: #5a4830; border-color: #8a7450; }
+  .number-pad button:hover { background: #d8ccb0; border-color: #a89478; }
   .number-pad button:active { cursor: grabbing; }
-  .number-pad button.depleted { opacity: 0.2; }
+  .number-pad button.depleted { visibility: hidden; }
+  .number-pad button.active-num { background: #d0c4a8; border-color: #a89060; box-shadow: inset 0 0 8px rgba(168,144,96,0.25); }
 
   /* Mode toggle */
   .mode-toggle {
@@ -202,16 +246,16 @@
     padding: 8px;
     font-size: 0.85rem;
     font-weight: 500;
-    border: 1.5px solid #6a5a40;
-    background: #3d3222;
-    color: #a89470;
+    border: 1.5px solid #b0a590;
+    background: #e8dcc8;
+    color: #7a6e5a;
     cursor: pointer;
     transition: all 0.12s;
   }
   .mode-toggle button:first-child { border-radius: 6px 0 0 6px; border-right-width: 0.75px; }
   .mode-toggle button:last-child { border-radius: 0 6px 6px 0; border-left-width: 0.75px; }
-  .mode-toggle button:hover { background: #4a3d2c; }
-  .mode-toggle button.active { background: #6a5a40; color: #e8dcc8; }
+  .mode-toggle button:hover { background: #d8ccb0; }
+  .mode-toggle button.active { background: #c8bca0; color: #4a4035; }
 
   /* Right sidebar */
   .side-right {
@@ -228,29 +272,48 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.12s;
-    background: rgba(255,255,255,0.05);
-    color: #a89470;
-    border: 1.5px solid #6a5a40;
+    background: rgba(255,255,255,0.3);
+    color: #7a6e5a;
+    border: 1.5px solid #b0a590;
     text-align: center;
   }
-  .side-right button:hover { background: #5a4830; color: #e8dcc8; border-color: #8a7450; }
+  .side-right button:hover { background: #d8ccb0; color: #4a4035; border-color: #a89478; }
 
   /* Hint box */
   .hint-box {
     margin-top: 14px;
-    background: #362c1e;
-    border: 1.5px solid #5a4a34;
+    background: #e8dcc8;
+    border: 1.5px solid #b0a590;
     border-radius: 6px;
     padding: 12px 16px;
     max-width: 450px;
-    font-size: 0.85rem;
+    max-height: 260px;
+    overflow-y: auto;
+    font-size: 0.82rem;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.6;
     display: none;
-    color: #a89470;
+    color: #6a5e4a;
   }
   .hint-box.visible { display: block; }
-  .hint-box strong { color: #d4c4a0; font-weight: 600; }
+  .hint-box strong { color: #4a4035; font-weight: 600; }
+
+  /* Fun fact bar */
+  .fact-bar {
+    margin-top: 14px;
+    max-width: 450px;
+    width: 450px;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid #c8bca0;
+    border-radius: 6px;
+    padding: 9px 14px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6a5e4a;
+    font-style: italic;
+  }
+  .fact-bar strong { font-style: normal; color: #5a4e40; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; }
 
   /* Toast */
   .alert-toast {
@@ -258,15 +321,15 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(-100px);
-    background: #8b3030;
-    color: #f0d0c8;
+    background: #c04030;
+    color: #fff;
     padding: 10px 22px;
     border-radius: 6px;
     font-weight: 500;
     font-size: 0.9rem;
     transition: transform 0.3s ease;
     z-index: 100;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
   .alert-toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -274,7 +337,7 @@
   .win-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.4);
     display: none;
     align-items: center;
     justify-content: center;
@@ -282,19 +345,19 @@
   }
   .win-overlay.show { display: flex; }
   .win-card {
-    background: #362c1e;
-    border: 2px solid #8a7450;
+    background: #e8dcc8;
+    border: 2px solid #a89478;
     border-radius: 10px;
     padding: 36px;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
-  .win-card h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 8px; color: #d4c4a0; }
-  .win-card p { margin-bottom: 18px; color: #9a8a6c; font-size: 0.9rem; font-weight: 400; }
+  .win-card h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 8px; color: #4a4035; }
+  .win-card p { margin-bottom: 18px; color: #7a6e5a; font-size: 0.9rem; font-weight: 400; }
   .win-card button {
-    background: #3d3222;
-    border: 1.5px solid #6a5a40;
-    color: #d4c4a0;
+    background: #d8ccb0;
+    border: 1.5px solid #b0a590;
+    color: #4a4035;
     padding: 8px 24px;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -302,13 +365,13 @@
     cursor: pointer;
     transition: all 0.12s;
   }
-  .win-card button:hover { background: #5a4830; border-color: #8a7450; }
+  .win-card button:hover { background: #c8bca0; border-color: #a89478; }
 
   /* Settings overlay */
   .settings-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.4);
     display: none;
     align-items: center;
     justify-content: center;
@@ -316,18 +379,18 @@
   }
   .settings-overlay.show { display: flex; }
   .settings-card {
-    background: #362c1e;
-    border: 2px solid #8a7450;
+    background: #e8dcc8;
+    border: 2px solid #a89478;
     border-radius: 10px;
     padding: 28px 32px;
     min-width: 320px;
     max-width: 90vw;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
   .settings-card h2 {
     font-size: 1.2rem;
     margin-bottom: 18px;
-    color: #d4c4a0;
+    color: #4a4035;
     font-weight: 600;
   }
   .settings-section { margin-bottom: 16px; }
@@ -335,7 +398,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #7a6a50;
+    color: #8a7e6c;
     margin-bottom: 8px;
     font-weight: 500;
   }
@@ -345,17 +408,17 @@
     justify-content: space-between;
     padding: 6px 0;
   }
-  .setting-row label { font-size: 0.9rem; color: #a89470; font-weight: 400; }
+  .setting-row label { font-size: 0.9rem; color: #5a4e40; font-weight: 400; }
   .setting-row select {
     width: 110px;
     text-align: center;
-    background: #3d3222;
-    border: 1.5px solid #6a5a40;
+    background: #d8ccb0;
+    border: 1.5px solid #b0a590;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 0.85rem;
     font-weight: 400;
-    color: #d4c4a0;
+    color: #4a4035;
     cursor: pointer;
   }
   .toggle {
@@ -368,7 +431,7 @@
   .toggle .slider {
     position: absolute;
     inset: 0;
-    background: #5a4a34;
+    background: #c8bca0;
     border-radius: 11px;
     transition: background 0.2s;
   }
@@ -379,27 +442,47 @@
     height: 16px;
     left: 3px;
     top: 3px;
-    background: #9a8a6c;
+    background: #fff;
     border-radius: 50%;
     transition: all 0.2s;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
-  .toggle input:checked + .slider { background: #8a7450; }
-  .toggle input:checked + .slider::before { transform: translateX(18px); background: #d4c4a0; }
+  .toggle input:checked + .slider { background: #a89478; }
+  .toggle input:checked + .slider::before { transform: translateX(18px); background: #fff; }
+  .shortcut-input {
+    background: #d8ccb0;
+    border: 1.5px solid #b0a590;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #4a4035;
+    cursor: pointer;
+    text-align: center;
+    min-width: 110px;
+    transition: all 0.15s;
+    outline: none;
+  }
+  .shortcut-input:focus { border-color: #8a7450; box-shadow: 0 0 0 2px rgba(168,144,96,0.3); }
+  .shortcut-input.recording { border-color: #b84a3e; color: #b84a3e; animation: recordPulse 1s ease-in-out infinite; }
+  @keyframes recordPulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(184,74,62,0.2); }
+    50% { box-shadow: 0 0 0 4px rgba(184,74,62,0.3); }
+  }
   .settings-card .close-btn {
     margin-top: 12px;
     width: 100%;
     padding: 9px;
     font-weight: 500;
-    background: #3d3222;
-    border: 1.5px solid #6a5a40;
-    color: #d4c4a0;
+    background: #d8ccb0;
+    border: 1.5px solid #b0a590;
+    color: #4a4035;
     border-radius: 6px;
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.12s;
   }
-  .settings-card .close-btn:hover { background: #5a4830; border-color: #8a7450; }
+  .settings-card .close-btn:hover { background: #c8bca0; border-color: #a89478; }
 
   /* Drag ghost */
   .drag-ghost {
@@ -407,9 +490,9 @@
     pointer-events: none;
     font-size: 2rem;
     font-weight: 600;
-    color: #d4c4a0;
-    background: rgba(90,72,48,0.9);
-    border: 2px solid #8a7450;
+    color: #4a4035;
+    background: rgba(232,220,200,0.95);
+    border: 2px solid #a89478;
     border-radius: 8px;
     width: 44px;
     height: 44px;
@@ -417,7 +500,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     transform: translate(-50%, -50%);
   }
 
@@ -427,16 +510,27 @@
     40%, 80% { transform: translateX(4px); }
   }
   @keyframes hintPulse {
-    0% { box-shadow: inset 0 0 0 0 rgba(184,152,96,0.4); }
-    50% { box-shadow: inset 0 0 16px 3px rgba(184,152,96,0.3); }
-    100% { box-shadow: inset 0 0 0 0 rgba(184,152,96,0); }
+    0% { box-shadow: inset 0 0 0 0 rgba(168,144,96,0.4); }
+    50% { box-shadow: inset 0 0 16px 3px rgba(168,144,96,0.35); }
+    100% { box-shadow: inset 0 0 0 0 rgba(168,144,96,0); }
+  }
+  @keyframes hintBlink {
+    0%, 100% { background: #d8c8a8; }
+    50% { background: #f0e6d6; }
+  }
+  @keyframes hintTextBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
   }
 
   @media (max-width: 700px) {
     .game-layout { flex-direction: column; align-items: center; gap: 12px; }
     .side-left, .side-right { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-    .side-left button, .side-right button { width: auto; padding: 7px 16px; }
-    .board, .number-pad, .mode-toggle { width: min(90vw, 450px); }
+    .side-left { width: auto; }
+    .diff-section button, .side-right button { width: auto; padding: 7px 16px; }
+    .diff-section { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .puzzle-grid { grid-template-columns: repeat(10, 1fr); }
+    .board, .number-pad, .mode-toggle, .fact-bar { width: min(90vw, 450px); }
     .board { height: min(90vw, 450px); }
   }
 </style>
@@ -451,28 +545,36 @@
 <div class="info-bar">
   <span id="timer">00:00</span>
   <span id="mistakeCount">Mistakes: 0</span>
+  <span id="progressInfo">Completed: 0/20</span>
 </div>
 
 <div class="game-layout">
   <div class="side-left">
-    <button class="diff-easy" onclick="setDifficulty('easy',this)">Easy</button>
-    <button class="diff-medium active" onclick="setDifficulty('medium',this)">Medium</button>
-    <button class="diff-hard" onclick="setDifficulty('hard',this)">Hard</button>
-    <button class="diff-expert" onclick="setDifficulty('expert',this)">Expert</button>
+    <div class="diff-section">
+      <button class="diff-easy" onclick="setDifficulty('easy',this)">Easy</button>
+      <button class="diff-medium active" onclick="setDifficulty('medium',this)">Medium</button>
+      <button class="diff-hard" onclick="setDifficulty('hard',this)">Hard</button>
+      <button class="diff-expert" onclick="setDifficulty('expert',this)">Expert</button>
+    </div>
+    <div>
+      <div class="puzzle-grid-label">Puzzles</div>
+      <div class="puzzle-grid" id="puzzleGrid"></div>
+    </div>
   </div>
 
   <div class="center-col">
     <div class="board" id="board"></div>
     <div class="number-pad" id="numpad"></div>
     <div class="mode-toggle">
-      <button id="modeNumber" class="active" onclick="setMode('number')">Number</button>
-      <button id="modeNote" onclick="setMode('note')">Notes</button>
+      <button id="modeNumber" class="active" onclick="event.stopPropagation(); setMode('number')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M18.37 2.63a2.12 2.12 0 0 1 3 3L14 13l-4 1 1-4z"/><path d="M2 21l5-1L14 13"/><path d="M2 21l1-5"/></svg>Number</button>
+      <button id="modeNote" onclick="event.stopPropagation(); setMode('note')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>Notes</button>
     </div>
     <div class="hint-box" id="hintBox"></div>
+    <div class="fact-bar" id="factBar"><strong>Did you know?</strong> Loading...</div>
   </div>
 
   <div class="side-right">
-    <button onclick="newGame()">New Game</button>
+    <button onclick="resetPuzzle()">Restart</button>
     <button onclick="getHint()" title="Hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>Hint</button>
     <button onclick="undo()" title="Undo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>Undo</button>
     <button onclick="erase()" title="Erase"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M20 20H7L3 16l8-8 9 9-4 4z"/><path d="M6.5 13.5l5-5"/></svg>Erase</button>
@@ -511,6 +613,17 @@
         </select>
       </div>
     </div>
+    <div class="settings-section">
+      <h3>Shortcuts</h3>
+      <div class="setting-row">
+        <label>Number/Notes toggle</label>
+        <div class="shortcut-input" id="shortcutToggle" tabindex="0" onclick="startRecording('toggle')">Tab</div>
+      </div>
+      <div class="setting-row">
+        <label>Hint</label>
+        <div class="shortcut-input" id="shortcutHint" tabindex="0" onclick="startRecording('hint')">Ctrl + H</div>
+      </div>
+    </div>
     <button class="close-btn" onclick="toggleSettings()">Done</button>
   </div>
 </div>
@@ -519,19 +632,20 @@
   <div class="win-card">
     <h2>Congratulations!</h2>
     <p id="winMessage">You solved the puzzle!</p>
-    <button onclick="newGame(); document.getElementById('winOverlay').classList.remove('show')">Play Again</button>
+    <button onclick="goNextPuzzle(); document.getElementById('winOverlay').classList.remove('show')">Next Puzzle</button>
   </div>
 </div>
 
 <div class="win-overlay" id="gameOverOverlay">
   <div class="win-card">
-    <h2 style="color:#d45040">Game Over</h2>
+    <h2 style="color:#c03020">Game Over</h2>
     <p id="gameOverMessage">Too many mistakes!</p>
-    <button onclick="newGame(); document.getElementById('gameOverOverlay').classList.remove('show')">Try Again</button>
+    <button onclick="resetPuzzle(); document.getElementById('gameOverOverlay').classList.remove('show')">Try Again</button>
   </div>
 </div>
 
 <script>
+// ─── State ─────────────────────────────────────────────────────
 let solution = [];
 let puzzle = [];
 let board = [];
@@ -545,16 +659,45 @@ let timerInterval = null;
 let seconds = 0;
 let dragNumber = null;
 let dragGhost = null;
+let activeNumber = null;
+let puzzleIndex = 0;
+let pendingHint = null; // {r, c, value} — hint awaiting Enter confirmation
 
 const CLUES = { easy: 42, medium: 32, hard: 25, expert: 20 };
+const PUZZLE_COUNT = 20;
+const DIFF_SEED = { easy: 1000, medium: 2000, hard: 3000, expert: 4000 };
 
 let settings = {
   highlightRC: true,
   highlightBox: true,
   highlightSame: true,
-  mistakeLimit: 3
+  mistakeLimit: 3,
+  shortcuts: {
+    toggle: { key: 'Tab', ctrl: false, shift: false, alt: false },
+    hint:   { key: 'h', ctrl: true, shift: false, alt: false }
+  }
 };
+let recordingShortcut = null; // 'toggle' | 'hint' | null
 
+// ─── Seeded PRNG (mulberry32) ──────────────────────────────────
+function mulberry32(seed) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function seededShuffle(arr, rng) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ─── Settings ──────────────────────────────────────────────────
 function toggleSettings() {
   document.getElementById('settingsOverlay').classList.toggle('show');
 }
@@ -568,27 +711,57 @@ function updateSettings() {
   render();
 }
 
+function formatShortcut(sc) {
+  const parts = [];
+  if (sc.ctrl) parts.push('Ctrl');
+  if (sc.alt) parts.push('Alt');
+  if (sc.shift) parts.push('Shift');
+  let keyName = sc.key;
+  if (keyName === ' ') keyName = 'Space';
+  else if (keyName.length === 1) keyName = keyName.toUpperCase();
+  parts.push(keyName);
+  return parts.join(' + ');
+}
+
+function startRecording(which) {
+  recordingShortcut = which;
+  const el = document.getElementById(which === 'toggle' ? 'shortcutToggle' : 'shortcutHint');
+  el.textContent = 'Press keys...';
+  el.classList.add('recording');
+  el.focus();
+}
+
+function stopRecording() {
+  recordingShortcut = null;
+  document.getElementById('shortcutToggle').classList.remove('recording');
+  document.getElementById('shortcutHint').classList.remove('recording');
+}
+
+function refreshShortcutDisplay() {
+  document.getElementById('shortcutToggle').textContent = formatShortcut(settings.shortcuts.toggle);
+  document.getElementById('shortcutHint').textContent = formatShortcut(settings.shortcuts.hint);
+}
+
 function updateMistakeDisplay() {
   const limit = settings.mistakeLimit;
   document.getElementById('mistakeCount').textContent =
     limit > 0 ? `Mistakes: ${mistakes} / ${limit}` : `Mistakes: ${mistakes}`;
 }
 
+// ─── Difficulty ────────────────────────────────────────────────
 function setDifficulty(diff, btn) {
   difficulty = diff;
-  document.querySelectorAll('.side-left button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.diff-section button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  newGame();
-}
-
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+  const completed = getCompleted(diff);
+  puzzleIndex = 0;
+  for (let i = 0; i < PUZZLE_COUNT; i++) {
+    if (!completed.includes(i)) { puzzleIndex = i; break; }
   }
-  return arr;
+  startPuzzle();
 }
 
+// ─── Puzzle generation (seeded) ────────────────────────────────
 function isValid(grid, r, c, num) {
   for (let i = 0; i < 9; i++) {
     if (grid[r][i] === num || grid[i][c] === num) return false;
@@ -600,15 +773,15 @@ function isValid(grid, r, c, num) {
   return true;
 }
 
-function solveSudoku(grid) {
+function solveSudoku(grid, rng) {
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
       if (grid[r][c] === 0) {
-        const nums = shuffle([1,2,3,4,5,6,7,8,9]);
+        const nums = seededShuffle([1,2,3,4,5,6,7,8,9], rng);
         for (const n of nums) {
           if (isValid(grid, r, c, n)) {
             grid[r][c] = n;
-            if (solveSudoku(grid)) return true;
+            if (solveSudoku(grid, rng)) return true;
             grid[r][c] = 0;
           }
         }
@@ -619,9 +792,12 @@ function solveSudoku(grid) {
   return true;
 }
 
-function generatePuzzle(diff) {
+function generatePuzzle(diff, idx) {
+  const seed = DIFF_SEED[diff] + idx;
+  const rng = mulberry32(seed);
+
   const grid = Array.from({length: 9}, () => Array(9).fill(0));
-  solveSudoku(grid);
+  solveSudoku(grid, rng);
   solution = grid.map(r => [...r]);
 
   const clueCount = CLUES[diff];
@@ -629,7 +805,7 @@ function generatePuzzle(diff) {
   for (let r = 0; r < 9; r++)
     for (let c = 0; c < 9; c++)
       cells.push([r, c]);
-  shuffle(cells);
+  seededShuffle(cells, rng);
 
   puzzle = solution.map(r => [...r]);
   let removed = 0;
@@ -645,9 +821,142 @@ function generatePuzzle(diff) {
   history = [];
   mistakes = 0;
   selected = null;
+  activeNumber = null;
   updateMistakeDisplay();
 }
 
+// ─── localStorage: progress tracking ──────────────────────────
+function getCompletedKey(diff) { return `sudoku_completed_${diff}`; }
+
+function getCompleted(diff) {
+  try {
+    const stored = localStorage.getItem(getCompletedKey(diff));
+    return stored ? JSON.parse(stored) : [];
+  } catch { return []; }
+}
+
+function markCompleted(diff, idx) {
+  const completed = getCompleted(diff);
+  if (!completed.includes(idx)) {
+    completed.push(idx);
+    localStorage.setItem(getCompletedKey(diff), JSON.stringify(completed));
+  }
+}
+
+function saveGameState() {
+  try {
+    const state = {
+      difficulty,
+      puzzleIndex,
+      board: board.map(r => [...r]),
+      notes: notes.map(r => r.map(c => [...c])),
+      mistakes,
+      seconds,
+      mode
+    };
+    localStorage.setItem('sudoku_game_state', JSON.stringify(state));
+  } catch {}
+}
+
+function clearSavedState() {
+  localStorage.removeItem('sudoku_game_state');
+}
+
+function loadGameState() {
+  try {
+    const stored = localStorage.getItem('sudoku_game_state');
+    if (!stored) return false;
+    const state = JSON.parse(stored);
+
+    difficulty = state.difficulty;
+    puzzleIndex = state.puzzleIndex;
+
+    generatePuzzle(difficulty, puzzleIndex);
+
+    board = state.board;
+    notes = state.notes.map(r => r.map(c => new Set(c)));
+    mistakes = state.mistakes;
+    seconds = state.seconds || 0;
+    mode = state.mode || 'number';
+    selected = null;
+    activeNumber = null;
+    history = [];
+
+    updateMistakeDisplay();
+
+    document.querySelectorAll('.diff-section button').forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`.diff-${difficulty}`);
+    if (btn) btn.classList.add('active');
+
+    setMode(mode);
+    return true;
+  } catch { return false; }
+}
+
+// ─── Puzzle grid display ───────────────────────────────────────
+function renderPuzzleGrid() {
+  const grid = document.getElementById('puzzleGrid');
+  grid.innerHTML = '';
+  const completed = getCompleted(difficulty);
+  for (let i = 0; i < PUZZLE_COUNT; i++) {
+    const box = document.createElement('div');
+    box.className = 'puzzle-box';
+    box.textContent = i + 1;
+    if (i === puzzleIndex) box.classList.add('active');
+    if (completed.includes(i)) box.classList.add('completed');
+    box.addEventListener('click', () => {
+      puzzleIndex = i;
+      startPuzzle();
+    });
+    grid.appendChild(box);
+  }
+}
+
+function updatePuzzleInfo() {
+  const completed = getCompleted(difficulty);
+  document.getElementById('progressInfo').textContent = `Completed: ${completed.length}/${PUZZLE_COUNT}`;
+  renderPuzzleGrid();
+}
+
+// ─── Navigation ────────────────────────────────────────────────
+function goNextPuzzle() {
+  puzzleIndex = (puzzleIndex + 1) % PUZZLE_COUNT;
+  startPuzzle();
+}
+
+function startPuzzle() {
+  generatePuzzle(difficulty, puzzleIndex);
+  createBoard();
+  render();
+  startTimer();
+  hideHint();
+  updatePuzzleInfo();
+  saveGameState();
+  showRandomFact();
+}
+
+function resetPuzzle() {
+  generatePuzzle(difficulty, puzzleIndex);
+  createBoard();
+  render();
+  startTimer();
+  hideHint();
+  updatePuzzleInfo();
+  saveGameState();
+}
+
+// ─── Deselect on click outside board ───────────────────────────
+document.addEventListener('click', e => {
+  const boardEl = document.getElementById('board');
+  const numpadEl = document.getElementById('numpad');
+  if (!boardEl.contains(e.target) && !numpadEl.contains(e.target)) {
+    selected = null;
+    activeNumber = null;
+    render();
+  }
+});
+
+// ─── Board creation ────────────────────────────────────────────
 function createBoard() {
   const el = document.getElementById('board');
   el.innerHTML = '';
@@ -657,13 +966,14 @@ function createBoard() {
       cell.className = 'cell';
       cell.dataset.r = r;
       cell.dataset.c = c;
-      cell.addEventListener('click', () => selectCell(r, c));
-      // Right-click handler
+      cell.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectCell(r, c);
+      });
       cell.addEventListener('contextmenu', e => {
         e.preventDefault();
         handleRightClick(r, c);
       });
-      // Drop target
       cell.addEventListener('dragover', e => {
         e.preventDefault();
         cell.classList.add('drag-over');
@@ -692,11 +1002,22 @@ function createNumpad() {
     const btn = document.createElement('button');
     btn.textContent = n;
     btn.draggable = true;
-    btn.addEventListener('click', () => enterNumber(n));
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!selected) {
+        activeNumber = (activeNumber === n) ? null : n;
+        selected = null;
+        render();
+      } else {
+        enterNumber(n);
+        activeNumber = n;
+        selected = null;
+        render();
+      }
+    });
     btn.addEventListener('dragstart', e => {
       e.dataTransfer.setData('text/plain', n);
       e.dataTransfer.effectAllowed = 'move';
-      // Custom ghost
       dragGhost = document.createElement('div');
       dragGhost.className = 'drag-ghost';
       dragGhost.textContent = n;
@@ -713,17 +1034,21 @@ function createNumpad() {
   }
 }
 
-// ─── Right-click: place highlighted number ────────────────────
+// ─── Right-click: place highlighted/active number ──────────────
 function handleRightClick(r, c) {
-  if (puzzle[r][c] !== 0) return; // given cell
-  // Find the currently highlighted number
-  const selectedNum = selected ? board[selected.r][selected.c] : 0;
-  if (selectedNum === 0) return; // no number highlighted
-  // Place it
+  if (puzzle[r][c] !== 0) return;
+  // Use activeNumber (from numpad) or the number in the selected cell
+  const num = activeNumber || (selected ? board[selected.r][selected.c] : 0);
+  if (num === 0) return;
   selected = {r, c};
-  enterNumber(selectedNum);
+  enterNumber(num);
+  // Keep activeNumber so user can keep right-clicking to place more
+  activeNumber = num;
+  selected = null;
+  render();
 }
 
+// ─── Render ────────────────────────────────────────────────────
 function render() {
   const cells = document.querySelectorAll('.cell');
   const counts = Array(10).fill(0);
@@ -731,15 +1056,18 @@ function render() {
     for (let c = 0; c < 9; c++)
       if (board[r][c] !== 0) counts[board[r][c]]++;
 
-  const selectedNum = selected ? board[selected.r][selected.c] : 0;
+  const selectedNum = activeNumber || (selected ? board[selected.r][selected.c] : 0);
 
   cells.forEach(cell => {
     const r = +cell.dataset.r, c = +cell.dataset.c;
     const val = board[r][c];
     const isGiven = puzzle[r][c] !== 0;
     const isSel = selected && selected.r === r && selected.c === c;
-    const sameRowCol = selected && (selected.r === r || selected.c === c);
-    const sameBox = selected && Math.floor(selected.r/3) === Math.floor(r/3) && Math.floor(selected.c/3) === Math.floor(c/3);
+
+    // Only highlight row/col/box if the selected cell has a number
+    const selectedHasNumber = selected && board[selected.r][selected.c] !== 0;
+    const sameRowCol = selectedHasNumber && (selected.r === r || selected.c === c);
+    const sameBox = selectedHasNumber && Math.floor(selected.r/3) === Math.floor(r/3) && Math.floor(selected.c/3) === Math.floor(c/3);
     const isHighlighted = (settings.highlightRC && sameRowCol) || (settings.highlightBox && sameBox);
     const isSameNum = settings.highlightSame && selectedNum !== 0 && val === selectedNum;
 
@@ -774,12 +1102,26 @@ function render() {
 
   document.querySelectorAll('#numpad button').forEach((btn, i) => {
     btn.classList.toggle('depleted', counts[i + 1] >= 9);
+    btn.classList.toggle('active-num', activeNumber === i + 1);
   });
+
+  // Re-apply hint preview if pending
+  if (pendingHint) renderHintPreview();
 }
 
+// ─── Cell selection ────────────────────────────────────────────
 function selectCell(r, c) {
+  if (pendingHint) cancelHint();
+  // If an activeNumber is set and the cell is empty, place it
+  if (activeNumber && puzzle[r][c] === 0 && board[r][c] === 0) {
+    selected = {r, c};
+    enterNumber(activeNumber);
+    selected = null;
+    render();
+    return;
+  }
   selected = {r, c};
-  hideHint();
+  activeNumber = null;
   render();
 }
 
@@ -789,6 +1131,7 @@ function setMode(m) {
   document.getElementById('modeNote').classList.toggle('active', m === 'note');
 }
 
+// ─── Number entry ──────────────────────────────────────────────
 function enterNumber(n) {
   if (!selected) return;
   const {r, c} = selected;
@@ -817,6 +1160,7 @@ function enterNumber(n) {
     }
   }
   render();
+  saveGameState();
 }
 
 function clearNotesAround(r, c, n) {
@@ -838,9 +1182,11 @@ function erase() {
   board[r][c] = 0;
   notes[r][c].clear();
   render();
+  saveGameState();
 }
 
 function undo() {
+  if (pendingHint) { cancelHint(); return; }
   if (history.length === 0) return;
   const action = history.pop();
   const {r, c} = action;
@@ -851,10 +1197,64 @@ function undo() {
     board[r][c] = action.prevVal;
     if (action.prevNotes) notes[r][c] = action.prevNotes;
   }
+  if (action.type === 'hint') hideHint();
   render();
+  saveGameState();
+}
+
+// ─── Keyboard ──────────────────────────────────────────────────
+function matchesShortcut(e, sc) {
+  return e.key.toLowerCase() === sc.key.toLowerCase()
+    && e.ctrlKey === sc.ctrl
+    && e.altKey === sc.alt
+    && e.shiftKey === sc.shift;
 }
 
 document.addEventListener('keydown', e => {
+  // Shortcut recording mode
+  if (recordingShortcut) {
+    if (e.key === 'Escape') { stopRecording(); refreshShortcutDisplay(); return; }
+    // Ignore lone modifier presses
+    if (['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) return;
+    e.preventDefault();
+    settings.shortcuts[recordingShortcut] = {
+      key: e.key,
+      ctrl: e.ctrlKey,
+      shift: e.shiftKey,
+      alt: e.altKey
+    };
+    stopRecording();
+    refreshShortcutDisplay();
+    return;
+  }
+
+  // Settings toggle
+  if (e.key === '/') { e.preventDefault(); toggleSettings(); return; }
+  // Hint confirm
+  if (e.key === 'Enter' && pendingHint) { e.preventDefault(); confirmHint(); return; }
+  if (e.key === 'Escape') {
+    if (pendingHint) { cancelHint(); return; }
+    if (document.getElementById('settingsOverlay').classList.contains('show')) { toggleSettings(); return; }
+    selected = null; activeNumber = null; render(); return;
+  }
+  // Configurable shortcuts
+  if (matchesShortcut(e, settings.shortcuts.toggle)) {
+    e.preventDefault();
+    setMode(mode === 'note' ? 'number' : 'note');
+    return;
+  }
+  if (matchesShortcut(e, settings.shortcuts.hint)) {
+    e.preventDefault();
+    getHint();
+    return;
+  }
+  // Number keys: if nothing selected, activate that number (like clicking numpad)
+  if (e.key >= '1' && e.key <= '9' && !selected) {
+    const n = +e.key;
+    activeNumber = (activeNumber === n) ? null : n;
+    render();
+    return;
+  }
   if (!selected) return;
   const {r, c} = selected;
   if (e.key >= '1' && e.key <= '9') {
@@ -865,10 +1265,10 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'ArrowDown' && r < 8) { selected.r++; render(); }
   else if (e.key === 'ArrowLeft' && c > 0) { selected.c--; render(); }
   else if (e.key === 'ArrowRight' && c < 8) { selected.c++; render(); }
-  else if (e.key === 'n' || e.key === 'N') { setMode(mode === 'note' ? 'number' : 'note'); }
   else if (e.key === 'z' && e.ctrlKey) { undo(); }
 });
 
+// ─── Alerts ────────────────────────────────────────────────────
 function showAlert(msg) {
   const el = document.getElementById('alertToast');
   el.textContent = msg;
@@ -876,80 +1276,157 @@ function showAlert(msg) {
   setTimeout(() => el.classList.remove('show'), 1500);
 }
 
+// ─── Win / Game Over ───────────────────────────────────────────
 function checkWin() {
   for (let r = 0; r < 9; r++)
     for (let c = 0; c < 9; c++)
       if (board[r][c] !== solution[r][c]) return;
   clearInterval(timerInterval);
+  markCompleted(difficulty, puzzleIndex);
+  clearSavedState();
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
   document.getElementById('winMessage').textContent =
     `Solved in ${mins}:${secs.toString().padStart(2, '0')} with ${mistakes} mistake${mistakes !== 1 ? 's' : ''}.`;
   document.getElementById('winOverlay').classList.add('show');
+  updatePuzzleInfo();
 }
 
 function gameOver() {
   clearInterval(timerInterval);
+  clearSavedState();
   document.getElementById('gameOverMessage').textContent =
     `You reached ${mistakes} mistake${mistakes !== 1 ? 's' : ''}. Better luck next time!`;
   document.getElementById('gameOverOverlay').classList.add('show');
 }
 
+// ─── Timer ─────────────────────────────────────────────────────
 function startTimer() {
   clearInterval(timerInterval);
-  seconds = 0;
-  document.getElementById('timer').textContent = '00:00';
+  document.getElementById('timer').textContent = formatTime(seconds);
   timerInterval = setInterval(() => {
     seconds++;
-    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-    const s = (seconds % 60).toString().padStart(2, '0');
-    document.getElementById('timer').textContent = `${m}:${s}`;
+    document.getElementById('timer').textContent = formatTime(seconds);
   }, 1000);
 }
 
+function formatTime(totalSecs) {
+  const m = Math.floor(totalSecs / 60).toString().padStart(2, '0');
+  const s = (totalSecs % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+// ─── Hints ─────────────────────────────────────────────────────
 function getHint() {
+  // If there's already a pending hint, ignore — user must press Enter to accept
+  if (pendingHint) return;
+
+  // Blur the button so Enter key won't re-trigger it via button focus
+  if (document.activeElement) document.activeElement.blur();
+
   const hint = findHint();
   if (!hint) {
     showHint('No hints available -- try entering some notes first, or the puzzle may already be complete.');
     return;
   }
   selected = {r: hint.r, c: hint.c};
-  showHint(hint.explanation);
-
-  const idx = hint.r * 9 + hint.c;
-  const cell = document.querySelectorAll('.cell')[idx];
-  cell.classList.add('hint-cell');
-  setTimeout(() => cell.classList.remove('hint-cell'), 1500);
+  showHint(hint.explanation + '<br><em style="font-size:0.8rem;color:#8a7e6c">Press Enter to accept</em>');
 
   if (hint.value) {
-    board[hint.r][hint.c] = hint.value;
-    notes[hint.r][hint.c].clear();
-    clearNotesAround(hint.r, hint.c, hint.value);
-    history.push({type: 'number', r: hint.r, c: hint.c, prevVal: 0, prevNotes: new Set()});
+    pendingHint = {r: hint.r, c: hint.c, value: hint.value};
+    renderHintPreview();
   }
+}
+
+function renderHintPreview() {
+  if (!pendingHint) return;
+  const idx = pendingHint.r * 9 + pendingHint.c;
+  const cell = document.querySelectorAll('.cell')[idx];
+  cell.classList.add('hint-preview');
+  // Show the number as a blinking preview
+  cell.innerHTML = '<span class="hint-value" style="color:#7a6e5a">' + pendingHint.value + '</span>';
+}
+
+function confirmHint() {
+  if (!pendingHint) return;
+  const {r, c, value} = pendingHint;
+  board[r][c] = value;
+  notes[r][c].clear();
+  clearNotesAround(r, c, value);
+  history.push({type: 'hint', r, c, prevVal: 0, prevNotes: new Set()});
+  pendingHint = null;
+  hideHint();
+  render();
+  saveGameState();
+  checkWin();
+}
+
+function cancelHint() {
+  if (!pendingHint) return;
+  pendingHint = null;
+  hideHint();
   render();
 }
 
+function describeEliminations(r, c, val) {
+  // Build a human-readable breakdown of why other numbers are eliminated
+  const inRow = [], inCol = [], inBox = [];
+  for (let i = 0; i < 9; i++) {
+    if (i !== c && board[r][i] !== 0) inRow.push(board[r][i]);
+    if (i !== r && board[i][c] !== 0) inCol.push(board[i][c]);
+  }
+  const br = Math.floor(r/3)*3, bc = Math.floor(c/3)*3;
+  for (let i = br; i < br+3; i++)
+    for (let j = bc; j < bc+3; j++)
+      if ((i !== r || j !== c) && board[i][j] !== 0) inBox.push(board[i][j]);
+
+  const parts = [];
+  const rowNums = [...new Set(inRow)].sort();
+  const colNums = [...new Set(inCol)].sort();
+  const boxNums = [...new Set(inBox)].sort();
+  if (rowNums.length > 0) parts.push(`Row ${r+1} contains {${rowNums.join(',')}}`);
+  if (colNums.length > 0) parts.push(`Column ${c+1} contains {${colNums.join(',')}}`);
+  if (boxNums.length > 0) parts.push(`The 3&times;3 box contains {${boxNums.join(',')}}`);
+  return parts.join('. ') + '.';
+}
+
 function findHint() {
+  // ── Strategy 1: Naked Single ──
+  // A cell where only one candidate remains after eliminating numbers
+  // already present in its row, column, and 3x3 box.
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
       if (board[r][c] !== 0) continue;
       const possible = getPossible(r, c);
       if (possible.length === 1) {
+        const elimDetail = describeEliminations(r, c, possible[0]);
         return { r, c, value: possible[0],
-          explanation: `<strong>Naked Single</strong> at R${r+1}C${c+1}: The only number that can go here is <strong>${possible[0]}</strong>. All other numbers (1-9) are already present in this cell's row, column, or 3x3 box.`
+          explanation: `<strong>Naked Single</strong> at R${r+1}C${c+1}<br><br>`
+            + `<strong>What is it?</strong> A Naked Single occurs when a cell has only one possible candidate left. Every other number (1\u20139) is already placed somewhere in the same row, column, or 3\u00d73 box, leaving only one option.<br><br>`
+            + `<strong>How to spot it:</strong> Look at the cell and mentally (or using notes) check which numbers 1\u20139 are missing from its row, column, and box. If only one number is missing from all three, that\u2019s your answer.<br><br>`
+            + `<strong>Here:</strong> ${elimDetail} The only number not blocked is <strong>${possible[0]}</strong>.`
         };
       }
     }
   }
+
+  // ── Strategy 2: Hidden Single ──
+  // A number that can only go in one cell within a row, column, or box,
+  // even though that cell might have other candidates.
   for (let num = 1; num <= 9; num++) {
     for (let r = 0; r < 9; r++) {
       if (rowHas(r, num)) continue;
       const spots = [];
       for (let c = 0; c < 9; c++) if (board[r][c] === 0 && canPlace(r, c, num)) spots.push(c);
       if (spots.length === 1) {
-        return { r, c: spots[0], value: num,
-          explanation: `<strong>Hidden Single (Row)</strong>: In row ${r+1}, the number <strong>${num}</strong> can only go in column ${spots[0]+1}.`
+        const c = spots[0];
+        const otherCandidates = getPossible(r, c).filter(n => n !== num);
+        return { r, c, value: num,
+          explanation: `<strong>Hidden Single (Row)</strong> at R${r+1}C${c+1}<br><br>`
+            + `<strong>What is it?</strong> A Hidden Single is when a particular number can only fit in one cell within a row, column, or box. Unlike a Naked Single (where the cell has only one candidate), this cell might have other candidates too\u2014but for this specific number, it\u2019s the only place it can go in the row.<br><br>`
+            + `<strong>How to spot it:</strong> Pick a number and scan a row. Check each empty cell: can this number go here? If only one cell says yes, that\u2019s a Hidden Single.<br><br>`
+            + `<strong>Here:</strong> In row ${r+1}, the number <strong>${num}</strong> is needed but every other empty cell in this row is blocked (by ${num} already appearing in their column or box). The only valid spot is column ${c+1}.`
+            + (otherCandidates.length > 0 ? ` (This cell could also hold ${otherCandidates.join(' or ')}, but ${num} <em>must</em> go here.)` : '')
         };
       }
     }
@@ -958,8 +1435,14 @@ function findHint() {
       const spots = [];
       for (let r = 0; r < 9; r++) if (board[r][c] === 0 && canPlace(r, c, num)) spots.push(r);
       if (spots.length === 1) {
-        return { r: spots[0], c, value: num,
-          explanation: `<strong>Hidden Single (Column)</strong>: In column ${c+1}, the number <strong>${num}</strong> can only go in row ${spots[0]+1}.`
+        const r = spots[0];
+        const otherCandidates = getPossible(r, c).filter(n => n !== num);
+        return { r, c, value: num,
+          explanation: `<strong>Hidden Single (Column)</strong> at R${r+1}C${c+1}<br><br>`
+            + `<strong>What is it?</strong> A Hidden Single is when a number can only fit in one cell within a row, column, or box. The cell may have multiple candidates, but this number has no other home in the column.<br><br>`
+            + `<strong>How to spot it:</strong> Pick a number and scan down a column. For each empty cell, ask: is this number blocked by the cell\u2019s row or box? If only one cell allows it, that\u2019s your Hidden Single.<br><br>`
+            + `<strong>Here:</strong> In column ${c+1}, the number <strong>${num}</strong> can only go in row ${r+1}. Every other empty cell in this column has ${num} blocked by its row or 3\u00d73 box.`
+            + (otherCandidates.length > 0 ? ` (Other candidates for this cell: ${otherCandidates.join(', ')}\u2014but ${num} is forced here.)` : '')
         };
       }
     }
@@ -971,13 +1454,24 @@ function findHint() {
           for (let j = bc; j < bc+3; j++)
             if (board[i][j] === 0 && canPlace(i, j, num)) spots.push([i, j]);
         if (spots.length === 1) {
-          return { r: spots[0][0], c: spots[0][1], value: num,
-            explanation: `<strong>Hidden Single (Box)</strong>: In this 3x3 box, the number <strong>${num}</strong> can only go at R${spots[0][0]+1}C${spots[0][1]+1}.`
+          const [r, c] = spots[0];
+          const otherCandidates = getPossible(r, c).filter(n => n !== num);
+          const boxLabel = `rows ${br+1}\u2013${br+3}, columns ${bc+1}\u2013${bc+3}`;
+          return { r, c, value: num,
+            explanation: `<strong>Hidden Single (Box)</strong> at R${r+1}C${c+1}<br><br>`
+              + `<strong>What is it?</strong> Within a 3\u00d73 box, a number can only go in one remaining cell. Other empty cells in the box are blocked because that number already appears in their row or column.<br><br>`
+              + `<strong>How to spot it:</strong> Focus on a 3\u00d73 box and pick a missing number. Check each empty cell\u2014does the number appear in that cell\u2019s row or column? If all but one cell is blocked, you\u2019ve found it.<br><br>`
+              + `<strong>Here:</strong> In the box at ${boxLabel}, the number <strong>${num}</strong> can only go at R${r+1}C${c+1}. All other empty cells in this box have ${num} blocked by their row or column.`
+              + (otherCandidates.length > 0 ? ` (This cell\u2019s other candidates: ${otherCandidates.join(', ')})` : '')
           };
         }
       }
     }
   }
+
+  // ── Strategy 3: Pointing Pair/Triple ──
+  // When a number in a box is confined to a single row or column,
+  // it can be eliminated from that row/column outside the box.
   for (let br = 0; br < 9; br += 3) {
     for (let bc = 0; bc < 9; bc += 3) {
       for (let num = 1; num <= 9; num++) {
@@ -995,8 +1489,13 @@ function findHint() {
             if (board[row][c] === 0 && notes[row][c].has(num)) { notes[row][c].delete(num); eliminated = true; }
           }
           if (eliminated) {
+            const spotNames = spots.map(s => `R${s[0]+1}C${s[1]+1}`).join(' and ');
+            const pairOrTriple = spots.length === 2 ? 'Pair' : 'Triple';
             return { r: row, c: spots[0][1],
-              explanation: `<strong>Pointing Pair/Triple</strong>: In this box, <strong>${num}</strong> can only appear in row ${row+1}, so it can be eliminated from row ${row+1} outside this box.`
+              explanation: `<strong>Pointing ${pairOrTriple} (Row)</strong><br><br>`
+                + `<strong>What is it?</strong> A Pointing Pair/Triple occurs when a candidate number within a 3\u00d73 box is confined to a single row (or column). Since that number must appear in one of those cells, it <em>cannot</em> appear anywhere else in that row outside the box. This lets you eliminate that candidate from other cells in the row.<br><br>`
+                + `<strong>How to spot it:</strong> In a box, look at where a particular number can go. If all its possible positions share the same row, then that number is \u201cpointing\u201d along that row\u2014eliminate it from the rest of the row.<br><br>`
+                + `<strong>Here:</strong> In the box at rows ${br+1}\u2013${br+3}, cols ${bc+1}\u2013${bc+3}, the number <strong>${num}</strong> can only go at ${spotNames}\u2014all in row ${row+1}. So <strong>${num}</strong> has been removed as a candidate from other cells in row ${row+1} outside this box.`
             };
           }
         }
@@ -1008,26 +1507,87 @@ function findHint() {
             if (board[r][col] === 0 && notes[r][col].has(num)) { notes[r][col].delete(num); eliminated = true; }
           }
           if (eliminated) {
+            const spotNames = spots.map(s => `R${s[0]+1}C${s[1]+1}`).join(' and ');
+            const pairOrTriple = spots.length === 2 ? 'Pair' : 'Triple';
             return { r: spots[0][0], c: col,
-              explanation: `<strong>Pointing Pair/Triple</strong>: In this box, <strong>${num}</strong> can only appear in column ${col+1}, so it can be eliminated from column ${col+1} outside this box.`
+              explanation: `<strong>Pointing ${pairOrTriple} (Column)</strong><br><br>`
+                + `<strong>What is it?</strong> A Pointing Pair/Triple occurs when a candidate within a box is confined to a single column. Since the number must be in one of those cells, it cannot appear elsewhere in that column. This lets you safely eliminate it from other cells in the column.<br><br>`
+                + `<strong>How to spot it:</strong> In a box, check where a number can go. If all positions are in the same column, the number is \u201cpointing\u201d down that column\u2014eliminate it from the rest of the column.<br><br>`
+                + `<strong>Here:</strong> In the box at rows ${br+1}\u2013${br+3}, cols ${bc+1}\u2013${bc+3}, the number <strong>${num}</strong> can only go at ${spotNames}\u2014all in column ${col+1}. So <strong>${num}</strong> has been removed as a candidate from other cells in column ${col+1} outside this box.`
             };
           }
         }
       }
     }
   }
+
+  // ── Strategy 4: Naked Pair ──
+  // Two cells in the same row/col/box that share the same two candidates.
+  // Those two numbers can be eliminated from all other cells in that unit.
+  for (let r = 0; r < 9; r++) {
+    const emptyCells = [];
+    for (let c = 0; c < 9; c++) if (board[r][c] === 0) emptyCells.push({c, p: getPossible(r, c)});
+    for (let i = 0; i < emptyCells.length; i++) {
+      if (emptyCells[i].p.length !== 2) continue;
+      for (let j = i+1; j < emptyCells.length; j++) {
+        if (emptyCells[j].p.length !== 2) continue;
+        if (emptyCells[i].p[0] === emptyCells[j].p[0] && emptyCells[i].p[1] === emptyCells[j].p[1]) {
+          const [a, b] = emptyCells[i].p;
+          // Check if eliminating from other cells in the row helps
+          let canEliminate = false;
+          for (const ec of emptyCells) {
+            if (ec.c === emptyCells[i].c || ec.c === emptyCells[j].c) continue;
+            if (ec.p.includes(a) || ec.p.includes(b)) { canEliminate = true; break; }
+          }
+          if (canEliminate) {
+            // Find a cell that benefits from this elimination and solve it
+            const val = solution[r][emptyCells[i].c];
+            return { r, c: emptyCells[i].c, value: val,
+              explanation: `<strong>Naked Pair (Row)</strong><br><br>`
+                + `<strong>What is it?</strong> A Naked Pair is when two cells in the same row, column, or box have exactly the same two candidates and no others. Since those two numbers must go in those two cells (in some order), they can be eliminated as candidates from every other cell in that unit.<br><br>`
+                + `<strong>How to spot it:</strong> Look for two cells in a row/column/box that both have only two candidates, and those candidates are identical. For example, if two cells both show {${a}, ${b}}, those numbers are \u201clocked\u201d into that pair.<br><br>`
+                + `<strong>Here:</strong> In row ${r+1}, cells at columns ${emptyCells[i].c+1} and ${emptyCells[j].c+1} both have only candidates {<strong>${a}</strong>, <strong>${b}</strong>}. This means <strong>${a}</strong> and <strong>${b}</strong> can be removed from all other cells in row ${r+1}. The answer at R${r+1}C${emptyCells[i].c+1} is <strong>${val}</strong>.`
+            };
+          }
+        }
+      }
+    }
+  }
+
+  // ── Fallback: find the cell with fewest candidates ──
   let best = null, bestLen = 10;
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
       if (board[r][c] !== 0) continue;
       const p = getPossible(r, c);
-      if (p.length < bestLen) { bestLen = p.length; best = {r, c}; }
+      if (p.length < bestLen) { bestLen = p.length; best = {r, c, candidates: p}; }
     }
   }
   if (best) {
     const val = solution[best.r][best.c];
+    const candidates = best.candidates;
+    let strategyName, strategyExplain;
+    if (candidates.length === 2) {
+      strategyName = 'Candidate Elimination';
+      strategyExplain = `<strong>What is it?</strong> This cell has been narrowed down to ${candidates.length} candidates: {${candidates.join(', ')}}. Solving it requires looking at how these candidates interact with other cells. Advanced strategies like X-Wing, Swordfish, XY-Wing, or chains may be needed to eliminate further.<br><br>`
+        + `<strong>Tips for advanced solving:</strong><br>`
+        + `\u2022 <strong>X-Wing:</strong> If a candidate appears in exactly two cells in two different rows, and those cells share the same two columns, the candidate can be eliminated from those columns in all other rows.<br>`
+        + `\u2022 <strong>XY-Wing:</strong> Three cells forming a \u201cwing\u201d pattern where each pair shares a candidate, allowing elimination of a common candidate from cells that see all three.<br>`
+        + `\u2022 <strong>Coloring:</strong> Assign \u201ccolors\u201d to a candidate in a chain of conjugate pairs to find contradictions.`;
+    } else {
+      strategyName = 'Advanced Logic';
+      strategyExplain = `<strong>What is it?</strong> This cell has ${candidates.length} remaining candidates: {${candidates.join(', ')}}. Basic strategies (singles, pairs, pointing) haven\u2019t resolved it. More advanced techniques are needed.<br><br>`
+        + `<strong>Strategies to try:</strong><br>`
+        + `\u2022 <strong>Hidden Pair/Triple:</strong> Two or three numbers that only appear in two or three cells within a unit\u2014other candidates in those cells can be removed.<br>`
+        + `\u2022 <strong>Box/Line Reduction:</strong> If a candidate in a row/column is confined to one box, eliminate it from the rest of the box.<br>`
+        + `\u2022 <strong>X-Wing:</strong> A rectangle pattern of a candidate in exactly two rows and two columns, allowing eliminations.<br>`
+        + `\u2022 <strong>Swordfish:</strong> An extension of X-Wing across three rows and columns.<br>`
+        + `\u2022 <strong>XY-Wing / XYZ-Wing:</strong> Three bi-value cells that form a logical wing, eliminating a shared candidate.`;
+    }
     return { r: best.r, c: best.c, value: val,
-      explanation: `<strong>Advanced logic</strong>: R${best.r+1}C${best.c+1} should be <strong>${val}</strong>. This requires techniques beyond basic singles.`
+      explanation: `<strong>${strategyName}</strong> at R${best.r+1}C${best.c+1}<br><br>`
+        + strategyExplain + `<br><br>`
+        + `<strong>Here:</strong> R${best.r+1}C${best.c+1} has candidates {${candidates.join(', ')}}. The correct answer is <strong>${val}</strong>.`
     };
   }
   return null;
@@ -1054,19 +1614,348 @@ function showHint(html) {
 }
 function hideHint() { document.getElementById('hintBox').classList.remove('visible'); }
 
-function newGame() {
-  generatePuzzle(difficulty);
-  createBoard();
-  render();
-  startTimer();
-  hideHint();
+// ─── Fun Facts ─────────────────────────────────────────────────
+const SUDOKU_FACTS = [
+  "The word 'Sudoku' is short for 'S\u016bji wa dokushin ni kagiru,' Japanese for 'the digits must remain single.'",
+  "Modern Sudoku was actually invented by an American, Howard Garns, in 1979. It was originally called 'Number Place.'",
+  "Sudoku became a worldwide phenomenon after Wayne Gould introduced it to The Times of London in 2004.",
+  "There are exactly 6,670,903,752,021,072,936,960 valid completed 9\u00d79 Sudoku grids.",
+  "When you account for symmetries (rotations, reflections, relabeling), there are 5,472,730,538 essentially different Sudoku grids.",
+  "The minimum number of clues needed for a Sudoku puzzle to have a unique solution is 17. No valid 16-clue puzzle has ever been found.",
+  "There are exactly 49,158 known valid 17-clue Sudoku puzzles.",
+  "A standard Sudoku puzzle should have exactly one solution. Puzzles with multiple solutions are considered flawed.",
+  "The 'Naked Single' is the most basic solving technique: a cell with only one possible candidate.",
+  "The 'Hidden Single' technique finds a number that can only go in one cell within a row, column, or box.",
+  "An 'X-Wing' pattern involves a candidate confined to exactly two cells in two different rows sharing the same columns.",
+  "The 'Swordfish' is an extension of X-Wing that uses three rows and three columns.",
+  "A 'Jellyfish' extends the pattern to four rows and four columns. Beyond that, it's rarely needed.",
+  "The 'XY-Wing' uses three cells with two candidates each, forming a logical chain that eliminates a candidate.",
+  "The hardest Sudoku puzzles require techniques like 'forcing chains' or trial-and-error to solve.",
+  "A Sudoku grid is a special case of a Latin square\u2014an n\u00d7n grid where each symbol appears exactly once per row and column.",
+  "Euler studied Latin squares in the 18th century, laying mathematical foundations that Sudoku would later build on.",
+  "The first known published Sudoku (as 'Number Place') appeared in Dell Pencil Puzzles & Word Games magazine in 1979.",
+  "Nikoli, a Japanese puzzle company, gave Sudoku its name and popularized it in Japan starting in 1984.",
+  "Nikoli introduced two key rules: the clue pattern must be rotationally symmetric, and no more than 30 clues.",
+  "Wayne Gould spent 6 years developing a computer program to generate Sudoku puzzles before pitching it to newspapers.",
+  "By 2005, Sudoku was being published in newspapers in over 50 countries.",
+  "The first World Sudoku Championship was held in Lucca, Italy in 2006. Jana Tylova of the Czech Republic won.",
+  "Thomas Snyder of the USA has won the World Sudoku Championship multiple times and is considered one of the greatest solvers.",
+  "Speed solvers can complete a hard Sudoku puzzle in under 2 minutes.",
+  "The world record for fastest Sudoku solve in competition is under 90 seconds.",
+  "Sudoku puzzles are NP-complete when generalized to n\u00d7n grids, meaning they're computationally hard in the general case.",
+  "Despite being NP-complete in general, most 9\u00d79 Sudoku puzzles can be solved efficiently with logic alone.",
+  "A backtracking algorithm can solve any valid Sudoku puzzle, but it's essentially brute force\u2014human techniques are more elegant.",
+  "Constraint propagation combined with search is how most computer Sudoku solvers work.",
+  "Peter Norvig wrote a famous essay 'Solving Every Sudoku Puzzle' demonstrating elegant constraint-based solving in Python.",
+  "Dancing Links (DLX), invented by Donald Knuth, is one of the fastest algorithms for solving Sudoku.",
+  "Sudoku can be formulated as an exact cover problem and solved using Algorithm X.",
+  "A properly constructed Sudoku puzzle can always be solved without guessing, using logic alone.",
+  "The difficulty of a Sudoku puzzle isn't just about the number of clues\u2014it's about which techniques are required.",
+  "An 'Easy' puzzle typically requires only Naked Singles and Hidden Singles to solve.",
+  "A 'Medium' puzzle might require Pointing Pairs and Naked Pairs in addition to singles.",
+  "A 'Hard' puzzle often requires X-Wings, Swordfish, or other advanced elimination techniques.",
+  "An 'Expert' puzzle may require chains, coloring, or uniqueness techniques.",
+  "A 'Naked Pair' is when two cells in a unit have exactly the same two candidates\u2014locking those numbers to those cells.",
+  "A 'Hidden Pair' is when two numbers only appear as candidates in two cells within a unit.",
+  "A 'Naked Triple' is three cells in a unit whose combined candidates contain exactly three numbers.",
+  "Hidden Triples and Quads exist too, but they're increasingly rare and hard to spot.",
+  "The 'Box/Line Reduction' technique eliminates candidates when a number in a row or column is confined to one box.",
+  "Coloring (also called 'Simple Coloring') assigns two colors to a candidate along chains of conjugate pairs.",
+  "If two cells with the same color can 'see' each other, that color is false and can be eliminated.",
+  "A 'Conjugate Pair' is when a candidate appears in exactly two cells within a unit.",
+  "The 'Unique Rectangle' technique exploits the fact that a valid puzzle must have a unique solution.",
+  "If four cells form a rectangle with the same two candidates, something must break the pattern to ensure uniqueness.",
+  "Some Sudoku variants include Killer Sudoku, where cages must sum to a given total.",
+  "Samurai Sudoku consists of five overlapping 9\u00d79 grids sharing corner boxes.",
+  "Jigsaw Sudoku replaces the 3\u00d73 boxes with irregular shapes.",
+  "Hyper Sudoku adds four extra interior boxes that must also contain 1-9.",
+  "Diagonal Sudoku requires the two main diagonals to also contain the numbers 1-9.",
+  "Anti-Knight Sudoku adds the constraint that cells a chess knight's move apart cannot contain the same number.",
+  "Thermometer Sudoku requires numbers along thermometer shapes to increase from bulb to tip.",
+  "Arrow Sudoku requires numbers along arrows to sum to the number in the arrow's circle.",
+  "Sandwich Sudoku gives clues for the sum of numbers between 1 and 9 in each row/column.",
+  "Kropki Sudoku uses black and white dots between cells to indicate consecutive or double relationships.",
+  "Miracle Sudoku famously uses only 2 given digits with anti-knight, anti-king, and non-consecutive constraints.",
+  "The 'Miracle Sudoku' video by Cracking the Cryptic went viral in 2020, amassing millions of views.",
+  "Cracking the Cryptic is the most popular Sudoku YouTube channel, run by Simon Anthony and Mark Goodliffe.",
+  "Simon Anthony's catchphrase 'Bobbins!' has become iconic in the Sudoku community.",
+  "Mark Goodliffe has been a UK crossword champion and is a former investment banker.",
+  "The Sudoku community has grown enormously online, with dedicated apps, forums, and competitions.",
+  "Sudoku is one of the most popular pencil puzzles in the world, alongside crosswords.",
+  "Many studies suggest that doing Sudoku regularly can help maintain cognitive function.",
+  "Sudoku engages logical reasoning, pattern recognition, and working memory.",
+  "Unlike crosswords, Sudoku requires no language knowledge\u2014it's universal.",
+  "Sudoku can be played with any 9 symbols, not just numbers. Letters or colors would work too.",
+  "The numbers in Sudoku have no mathematical relationship\u2014they're just symbols. You never add or multiply them.",
+  "Sudoku grids have deep connections to group theory in mathematics.",
+  "The symmetry group of Sudoku transformations has been studied extensively by mathematicians.",
+  "You can transform any completed Sudoku grid into many others by swapping rows, columns, or relabeling digits.",
+  "Two Sudoku grids are 'essentially the same' if one can be transformed into the other by these operations.",
+  "Sudoku has been used as a teaching tool in mathematics education to illustrate constraint satisfaction.",
+  "Graph coloring problems are closely related to Sudoku\u2014each cell is a node, constraints are edges.",
+  "A Sudoku grid can be represented as a graph with 81 nodes and constraints forming edges between them.",
+  "Solving Sudoku is equivalent to coloring a specific graph with 9 colors.",
+  "The 'Pencil Mark' technique (noting candidates in cells) was popularized by competitive Sudoku solvers.",
+  "Bifurcation (guessing and checking) is considered inelegant by purists, who prefer pure logic.",
+  "Some of the hardest Sudoku puzzles are rated using the Sudoku Explainer Difficulty (SER) scale.",
+  "The maximum SER rating is around 11.9, requiring extremely advanced techniques.",
+  "A puzzle rated SER 1-2 is easy, 3-4 is medium, 5-7 is hard, and 8+ is expert/extreme.",
+  "The 'Easter Monster' is one of the hardest known Sudoku puzzles, requiring deep chain analysis.",
+  "The 'Platinum Blonde' puzzle is famous for requiring advanced uniqueness techniques.",
+  "AI-17 was a groundbreaking Sudoku puzzle that helped establish the minimum clue conjecture.",
+  "Gary McGuire's team proved in 2012 that no 16-clue Sudoku puzzle with a unique solution exists.",
+  "Their proof required over 7 million CPU hours of computation.",
+  "The most common number of clues in published Sudoku puzzles is between 24 and 28.",
+  "Puzzles with rotational symmetry in their clue pattern are considered more aesthetically pleasing.",
+  "Many newspaper Sudoku puzzles are generated by computer programs, not crafted by hand.",
+  "Hand-crafted Sudoku puzzles by experts like Nikoli tend to have smoother, more satisfying solving paths.",
+  "A 'smooth' puzzle has a logical path that flows naturally without requiring difficult jumps.",
+  "Some puzzle constructors aim for puzzles that can be solved with a single technique throughout.",
+  "In Japanese puzzle culture, the constructor (or 'setter') is highly respected as an artist.",
+  "Sudoku puzzle books have sold hundreds of millions of copies worldwide since 2005.",
+  "At the peak of the Sudoku craze (2005-2006), it was called 'the Rubik's Cube of the 21st century.'",
+  "Some airlines offer Sudoku puzzles in their in-flight entertainment systems.",
+  "Sudoku apps are consistently among the most downloaded puzzle games on mobile devices.",
+  "The logic behind Sudoku is related to error-correcting codes used in telecommunications.",
+  "Latin squares (Sudoku's mathematical parent) are used in experimental design and statistics.",
+  "Orthogonal Latin squares, related to Sudoku, were studied by Euler in his famous '36 officers problem.'",
+  "A standard Sudoku grid has 27 'units': 9 rows, 9 columns, and 9 boxes.",
+  "Each cell in a Sudoku grid belongs to exactly 3 units: one row, one column, and one box.",
+  "Each cell 'sees' 20 other cells (its peers): 8 in its row, 8 in its column, and up to 4 more in its box.",
+  "The term 'peer' refers to any cell that shares a unit with a given cell.",
+  "If two cells are peers, they cannot contain the same number.",
+  "A 'unit' is complete when it contains all 9 different digits.",
+  "The 'first available candidate' strategy (scanning left to right, top to bottom) is how beginners often start.",
+  "Expert solvers typically scan for the most constrained cells or units first.",
+  "Cross-hatching is a scanning technique where you check row and column constraints to find placements in boxes.",
+  "Slice-and-dice refers to combining cross-hatching across multiple boxes simultaneously.",
+  "Many competitive solvers use a combination of scanning and bifurcation for speed.",
+  "In competition, the fastest solvers rarely use pencil marks\u2014they solve entirely by scanning.",
+  "Sudoku competitions often include variant puzzles that test adaptability.",
+  "The World Puzzle Federation organizes the annual World Sudoku Championship.",
+  "Teams from Japan, Germany, Czech Republic, and the USA are traditionally strong at international Sudoku competitions.",
+  "Some Sudoku variants have grids larger than 9\u00d79, like 16\u00d716 using hexadecimal digits.",
+  "A 16\u00d716 Sudoku uses digits 0-9 and letters A-F, with 4\u00d74 boxes.",
+  "Mini Sudoku uses a 4\u00d74 or 6\u00d76 grid, great for beginners.",
+  "A 6\u00d76 Sudoku with 2\u00d73 boxes is a popular teaching tool for children.",
+  "Sudoku can be extended to 3D, where constraints apply across three dimensions.",
+  "The 'Phistomefel Ring' is a famous Sudoku theorem about the relationship between certain cell groups.",
+  "It states that the 16 cells forming a ring around the center box contain the same digits as the 16 corner cells.",
+  "This theorem is used in variant Sudoku puzzles and was popularized by the German constructor Phistomefel.",
+  "A 'bivalue cell' has exactly two candidates. These are important for XY-Wing and chain techniques.",
+  "A 'bilocal candidate' appears in exactly two cells within a unit. These form conjugate pairs.",
+  "Chains of conjugate pairs can reveal contradictions that eliminate candidates far from where they start.",
+  "The 'Medusa' technique extends simple coloring to multiple candidates simultaneously.",
+  "A 'remote pair' is a chain of bivalue cells with the same two candidates, used to make eliminations at the chain's endpoints.",
+  "The 'W-Wing' is a pattern involving two bivalue cells connected by a strong link on one of their candidates.",
+  "A 'Finned X-Wing' is an X-Wing with extra candidate cells (fins) that limit but don't destroy the elimination.",
+  "A 'Sashimi X-Wing' is a Finned X-Wing where one of the corner cells is missing.",
+  "Almost Locked Sets (ALS) are groups of N cells with N+1 candidates, used in advanced elimination chains.",
+  "The 'Sue de Coq' technique combines ALS theory with box/line interactions.",
+  "Forcing chains try both possibilities for a bivalue cell and look for common outcomes.",
+  "If both possibilities for a cell lead to the same conclusion for another cell, that conclusion must be true.",
+  "Nishio is a trial-and-error technique where you assume a candidate is true and look for contradictions.",
+  "Most Sudoku purists prefer techniques that provide logical proof over trial-and-error methods.",
+  "The 'BUG' (Bivalue Universal Grave) technique uses uniqueness: if only bivalue cells remain, something is wrong.",
+  "A BUG+1 means all cells are bivalue except one with three candidates\u2014the extra candidate must be true.",
+  "Sudoku teaches important programming concepts like constraint satisfaction, backtracking, and pruning.",
+  "Many computer science courses use Sudoku as a project for teaching recursive algorithms.",
+  "Sudoku solving is a classic constraint satisfaction problem (CSP) in artificial intelligence.",
+  "Arc consistency, a technique from CSP theory, is equivalent to basic Sudoku elimination.",
+  "Maintaining arc consistency alone can solve easy and medium Sudoku puzzles.",
+  "The 'AC-3' algorithm is commonly used to implement arc consistency in Sudoku solvers.",
+  "Some advanced Sudoku solvers use Boolean satisfiability (SAT) to solve the hardest puzzles.",
+  "Modern SAT solvers can solve any 9\u00d79 Sudoku puzzle in milliseconds.",
+  "Integer Linear Programming (ILP) can also model and solve Sudoku efficiently.",
+  "Genetic algorithms have been applied to Sudoku, though they're slower than constraint-based approaches.",
+  "Neural networks can learn to solve Sudoku but struggle with harder puzzles compared to logic-based solvers.",
+  "Deep learning approaches to Sudoku achieve about 70-80% accuracy on hard puzzles without search.",
+  "The combination of neural networks and search (similar to AlphaGo) can solve Sudoku perfectly.",
+  "Sudoku has been used to benchmark various optimization and search algorithms.",
+  "A Sudoku puzzle is 'proper' if it has exactly one solution. Most published puzzles are proper.",
+  "An 'improper' puzzle with zero solutions is called unsolvable; one with multiple solutions is ambiguous.",
+  "The maximum number of clues a puzzle can have while still being ambiguous is 77.",
+  "With 78 or more clues, a puzzle is always either proper or unsolvable.",
+  "An empty Sudoku grid (0 clues) has over 6.67 sextillion solutions.",
+  "The 'Sudoku Garden' is an online community where enthusiasts share and solve puzzles.",
+  "Logic Masters Germany is a hub for competitive puzzle enthusiasts, including Sudoku.",
+  "Conceptis Puzzles is one of the largest suppliers of Sudoku puzzles to newspapers worldwide.",
+  "Will Shortz, famous for the New York Times crossword, helped popularize Sudoku in the US.",
+  "Some Sudoku apps use AI to analyze your solving technique and suggest improvements.",
+  "Sudoku has been adapted into board games, card games, and even multiplayer competitive formats.",
+  "In competitive Sudoku, incomplete but correct grids score partial points based on the number of cells filled.",
+  "Many schools use Sudoku as an educational tool to develop logical thinking skills.",
+  "Research suggests Sudoku can help delay cognitive decline in older adults, similar to crosswords.",
+  "Sudoku competitions at the national level exist in over 30 countries.",
+  "The World Puzzle Championship includes Sudoku as one of its featured puzzle types.",
+  "A 'Givens' is another term for the initially filled-in clues in a Sudoku puzzle.",
+  "The arrangement of givens is called the 'topology' of the puzzle.",
+  "Puzzles with full rotational symmetry (180\u00b0) are the most common aesthetic standard.",
+  "Some constructors create puzzles with diagonal symmetry or other artistic patterns.",
+  "A Sudoku puzzle's difficulty can change dramatically by adding or removing a single clue.",
+  "Some puzzles are designed so that the solving path 'opens up' after finding one critical cell.",
+  "These bottleneck cells are sometimes called 'crux' cells by puzzle constructors.",
+  "The art of Sudoku construction is balancing difficulty, uniqueness, and a satisfying solve path.",
+  "Top constructors can craft puzzles that tell a 'story' through their solving path.",
+  "In Japan, Sudoku magazines regularly feature puzzles hand-crafted by named constructors.",
+  "Maki Kaji, president of Nikoli, is often called the 'Godfather of Sudoku.' He passed away in 2021.",
+  "Kaji chose the name 'Sudoku' because it was shorter and catchier than the original Japanese phrase.",
+  "Before Sudoku, Nikoli was known for popularizing other logic puzzles like Kakuro and Hashiwokakero.",
+  "Kakuro (Cross Sums) is sometimes called 'mathematical crosswords' and predates Sudoku's popularity.",
+  "Nonograms (Picross), another Japanese logic puzzle, share Sudoku's emphasis on pure deduction.",
+  "The Sudoku craze of 2005 was compared to previous puzzle crazes like Rubik's Cube (1980s) and crosswords (1920s).",
+  "Google's first-ever Doodle game was a Rubik's Cube, but Sudoku has never been a Google Doodle.",
+  "Sudoku appears in many TV shows and movies as a shorthand for 'this character is smart.'",
+  "The British TV show 'Countdown' introduced a Sudoku segment during the puzzle's peak popularity.",
+  "Some prisons ban Sudoku books because they can be used to create codes.",
+  "The New York Times didn't start publishing Sudoku until 2014\u2014a decade after the global craze began.",
+  "Will Shortz initially resisted Sudoku, feeling it competed with his crossword puzzles.",
+  "Sudoku puzzles in newspapers are typically rated on a 1-5 star difficulty scale.",
+  "Monday puzzles in most newspapers are easy, with difficulty increasing toward the weekend.",
+  "Some newspapers publish multiple Sudoku puzzles daily at different difficulty levels.",
+  "Digital Sudoku has largely replaced paper Sudoku for many solvers due to features like note-taking and undo.",
+  "The 'undo' button in digital Sudoku has changed solving behavior\u2014people take more risks.",
+  "Auto-candidate features in apps can show all possible numbers for each cell, speeding up advanced techniques.",
+  "Purists argue that auto-candidates make puzzles too easy and reduce the scanning skill requirement.",
+  "Pencil marks in paper Sudoku are traditionally written as small numbers in the corners of cells.",
+  "Some solvers use 'center marks' (center of the cell) vs 'corner marks' (corners) for different purposes.",
+  "Center marks typically mean 'this cell IS one of these numbers,' while corner marks mean 'this number CAN go here.'",
+  "The convention of center vs corner marks was popularized by Cracking the Cryptic videos.",
+  "A well-designed puzzle should have a clear logical path that doesn't require backtracking.",
+  "Some puzzles are designed to be 'anti-puzzles'\u2014intentionally frustrating with misleading patterns.",
+  "The 'hardest Sudoku ever' is a subjective claim, but Arto Inkala's puzzles are frequently cited.",
+  "Arto Inkala, a Finnish mathematician, has created several puzzles claimed to be the world's hardest.",
+  "His puzzle 'AI Escargot' (2006) was one of the first puzzles widely publicized as extremely difficult.",
+  "Sudoku can be played competitively in teams, where members specialize in different techniques.",
+  "Some teams assign specific regions of the grid to different members for parallel solving.",
+  "The fastest team solves in competition finish a hard puzzle in under a minute.",
+  "Sudoku variants often combine standard Sudoku with other constraint types for extra challenge.",
+  "The 'Little Killer' variant gives diagonal sum clues from outside the grid.",
+  "Renban lines require cells along them to contain a set of consecutive digits in any order.",
+  "German Whispers lines require adjacent cells on the line to differ by at least 5.",
+  "Between Lines have circles at each end\u2014cells on the line must have values between the circle values.",
+  "Palindrome lines read the same from both ends.",
+  "Ratio lines require adjacent cells to have a specified ratio (commonly 1:2).",
+  "XV Sudoku places X (sum of 10) and V (sum of 5) markers between adjacent cells.",
+  "Greater Than Sudoku shows inequality signs between all adjacent cells.",
+  "Even/Odd Sudoku shades cells to indicate whether they contain even or odd numbers.",
+  "Fortress Sudoku marks cells that must be greater (or less) than all their orthogonal neighbors.",
+  "Skyscraper Sudoku uses clues on the grid's edges indicating how many 'buildings' you can see from that direction.",
+  "Clone Sudoku has highlighted regions that must contain the same digits in the same positions.",
+  "Chaos Construction puzzles require the solver to determine the box shapes as part of the solve.",
+  "Fog of War Sudoku hides parts of the grid until nearby cells are solved.",
+  "Sudoku has a thriving competitive scene with both online and in-person tournaments.",
+  "The Logic Masters India Sudoku Test is one of the most prestigious online Sudoku competitions.",
+  "Many online Sudoku platforms track your solving statistics and show improvement over time.",
+  "Speed-solving techniques differ from logical proof techniques\u2014speed solvers use pattern recognition extensively.",
+  "Expert speed solvers often don't consciously think through techniques\u2014they pattern-match intuitively.",
+  "The average person takes 10-30 minutes to solve a medium Sudoku puzzle.",
+  "Beginners often take an hour or more on their first Sudoku puzzle.",
+  "With practice, most people can improve their Sudoku solving speed by 50% or more.",
+  "Sudoku is one of the few puzzles where computers are faster but humans are more elegant.",
+  "The mathematical structure of Sudoku is related to quasigroups and combinatorial designs.",
+  "A Sudoku grid defines a set of three mutually orthogonal Latin squares of order 3.",
+  "The relationship between Sudoku and error-correcting codes has been explored in coding theory research.",
+  "Sudoku-like constraints appear in scheduling problems, resource allocation, and experimental design.",
+  "The constraint 'all different' used in Sudoku is one of the most studied constraints in CSP literature.",
+  "Some researchers have studied the 'phase transition' in random Sudoku\u2014where puzzles shift from easy to hard.",
+  "At around 23-24 clues, randomly generated puzzles undergo a difficulty phase transition.",
+  "The number of essentially different Sudoku puzzles (not grids) is astronomically large.",
+  "No one knows exactly how many valid Sudoku puzzles exist\u2014only how many completed grids there are.",
+  "Sudoku teaches patience. The best solvers know when to move on and look at a different part of the grid.",
+  "Experienced solvers develop 'Sudoku vision'\u2014the ability to quickly spot patterns across the grid.",
+  "The 'one rule' of Sudoku is simple, but the strategies that emerge from it are deep and varied.",
+  "Sudoku is deterministic: there's no luck involved. The solution is fully determined by logic.",
+  "Unlike games like poker or backgammon, Sudoku has no random element once the puzzle is set.",
+  "The appeal of Sudoku lies in the contrast between its simple rules and complex solving strategies.",
+  "A Sudoku grid has more constraints than a crossword\u2014each cell participates in 3 different units.",
+  "Some Sudoku apps gamify the experience with streaks, achievements, and daily challenges.",
+  "The 'daily puzzle' format encourages consistent practice and community comparison.",
+  "Solving Sudoku activates the prefrontal cortex, the brain region associated with planning and decision-making.",
+  "Studies have shown Sudoku can reduce anxiety by providing focused, meditative concentration.",
+  "The 'flow state' that expert Sudoku solvers describe is similar to what musicians and athletes experience.",
+  "Sudoku doesn't require mathematical ability. It's purely a logic and pattern recognition puzzle.",
+  "This is a common misconception: many people avoid Sudoku thinking they need to be 'good at math.'",
+  "Children as young as 6 can enjoy simplified Sudoku puzzles (4\u00d74 grids with 2\u00d72 boxes).",
+  "Sudoku has been adapted for visually impaired players using tactile grids with raised symbols.",
+  "Braille Sudoku books exist and are produced by organizations for the blind.",
+  "Some Sudoku variants use colors instead of numbers, making them accessible to a wider audience.",
+  "Multiplayer Sudoku apps allow friends to race to solve the same puzzle simultaneously.",
+  "Cooperative Sudoku variants exist where two players share information to solve a combined grid.",
+  "The mathematics of Sudoku has been the subject of dozens of peer-reviewed academic papers.",
+  "Sudoku was featured in the journal 'American Scientist' for its deep mathematical properties.",
+  "The Journal of Combinatorial Designs has published multiple papers on Sudoku's algebraic structure.",
+  "Some mathematicians have studied what happens when you change the rules\u2014like allowing repeated digits in boxes.",
+  "Sudoku-like puzzles exist on different grid shapes: hexagonal, triangular, and even spherical.",
+  "A Sudoku puzzle printed in large format holds the Guinness World Record for largest puzzle at over 275 square feet.",
+  "The Guinness World Record for most Sudoku puzzles solved in 24 hours involves solving thousands of easy puzzles.",
+  "Speed cubers and Sudoku solvers share similar cognitive traits: pattern recognition and spatial reasoning.",
+  "Many puzzle enthusiasts enjoy both Sudoku and logic puzzles like Nonograms, Kakuro, and Star Battle.",
+  "Star Battle, a newer logic puzzle, has been gaining popularity alongside Sudoku in competition circuits.",
+  "The 'setting' (constructing) of Sudoku puzzles is considered an art form by many in the community.",
+  "A setter must balance difficulty, aesthetics (clue pattern), uniqueness of solution, and solving path quality.",
+  "Machine-generated puzzles often lack the elegance and satisfying 'aha moments' of hand-crafted ones.",
+  "Some of the most celebrated Sudoku puzzles have themes\u2014like the final grid forming a visual pattern.",
+  "Constructors sometimes hide messages or patterns in the completed grid as Easter eggs.",
+  "The 'Rule of 45' states that each row, column, and box sums to 45 (1+2+3+...+9=45).",
+  "This rule is primarily useful in Killer Sudoku and similar variants that involve arithmetic.",
+  "In standard Sudoku, the Rule of 45 is always true but rarely needed for solving.",
+  "Sudoku puzzles appear in standardized tests in some countries as a measure of logical reasoning.",
+  "Some job interviews include Sudoku-like logic puzzles to assess problem-solving ability.",
+  "The Sudoku craze inspired several books about the puzzle's history, including 'Taking Sudoku Seriously.'",
+  "'Taking Sudoku Seriously' by Jason Rosenhouse and Laura Taalman explores the deep mathematics of Sudoku.",
+  "Laura Taalman ('Mathgrrl') has created many innovative Sudoku variants and 3D-printed puzzle designs.",
+  "Sudoku has inspired academic courses titled 'The Mathematics of Sudoku' at several universities.",
+  "The 'empty rectangle' technique is an intermediate strategy based on candidate patterns within a box.",
+  "A 'turbot fish' (or 'turbot crane') is a short forcing chain using strong and weak links.",
+  "Strong links connect two cells where a candidate must be in exactly one of them.",
+  "Weak links connect two cells where a candidate can be in at most one of them.",
+  "Every conjugate pair defines a strong link. Every pair of cells in the same unit defines a weak link.",
+  "Chains alternate between strong and weak links to derive logical conclusions.",
+  "An 'AIC' (Alternating Inference Chain) starts and ends with strong links, making the endpoints peers eliminate the candidate.",
+  "The 'Skyscraper' technique is a simple two-string kite pattern\u2014one of the easiest chain-based techniques.",
+  "The '2-String Kite' uses two conjugate pairs in a row and column connected through a box.",
+  "Many advanced techniques are just specific patterns of short alternating inference chains.",
+  "Once you understand AIC logic, most advanced techniques become variations of the same idea.",
+  "Sudoku solving can be viewed as a graph search problem, exploring the space of possible configurations.",
+  "The 'search tree' of a Sudoku puzzle represents all possible assignments at each step.",
+  "Good constraint propagation dramatically prunes the search tree, making puzzles tractable.",
+  "The order in which you fill cells matters for efficiency: most constrained cells first is optimal.",
+  "This is called the 'Minimum Remaining Values' (MRV) heuristic in AI terminology.",
+  "Sudoku solving combines deductive reasoning (logic) with sometimes abductive reasoning (best explanation).",
+  "Teaching a computer to explain why it placed a number is much harder than just solving the puzzle.",
+  "Human-readable Sudoku hints require translating constraint propagation steps into natural language.",
+  "Some apps rate puzzle difficulty by analyzing which human-understandable techniques are needed.",
+  "A puzzle's difficulty rating depends on both the hardest technique required and how many times it's needed.",
+  "Sudoku teaches a valuable life skill: systematically trying approaches rather than randomly guessing.",
+  "The Sudoku community is remarkably welcoming to beginners, with many free resources for learning.",
+  "Online forums like r/sudoku on Reddit are active communities for sharing puzzles and techniques.",
+  "Many top solvers create tutorial content, making advanced techniques accessible to everyone.",
+  "The beauty of Sudoku is that anyone can start with simple puzzles and gradually master harder ones.",
+  "There's always a harder puzzle to tackle\u2014the progression from beginner to expert is deeply rewarding."
+];
+
+function showRandomFact() {
+  const idx = Math.floor(Math.random() * SUDOKU_FACTS.length);
+  document.getElementById('factBar').innerHTML = '<strong>Did you know?</strong> ' + SUDOKU_FACTS[idx];
 }
 
+// ─── Init ──────────────────────────────────────────────────────
 document.getElementById('settingsOverlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) toggleSettings();
 });
+
 createNumpad();
-newGame();
+
+if (loadGameState()) {
+  createBoard();
+  render();
+  startTimer();
+  updatePuzzleInfo();
+  showRandomFact();
+} else {
+  startPuzzle();
+}
 </script>
 </body>
 </html>
