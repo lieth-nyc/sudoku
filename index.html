@@ -172,6 +172,9 @@
     border-right: 1px solid #c8b89a;
     border-bottom: 1px solid #c8b89a;
     user-select: none;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
   }
   .cell:nth-child(9n) { border-right: none; }
   .cell:nth-child(n+73) { border-bottom: none; }
@@ -459,7 +462,7 @@
     color: #4a4035;
     cursor: pointer;
     text-align: center;
-    min-width: 110px;
+    width: 110px;
     transition: all 0.15s;
     outline: none;
   }
@@ -539,7 +542,7 @@
 
 <div class="header">
   <h1>Sudoku</h1>
-  <button class="settings-btn" onclick="toggleSettings()" title="Settings">&#9881;</button>
+  <button class="settings-btn" onclick="toggleSettings()" title="Settings (/)">&#9881; <span style="font-size:0.85rem;color:#b0a590;font-weight:400">/</span></button>
 </div>
 
 <div class="info-bar">
@@ -621,7 +624,11 @@
       </div>
       <div class="setting-row">
         <label>Hint</label>
-        <div class="shortcut-input" id="shortcutHint" tabindex="0" onclick="startRecording('hint')">Ctrl + H</div>
+        <div class="shortcut-input" id="shortcutHint" tabindex="0" onclick="startRecording('hint')">H</div>
+      </div>
+      <div class="setting-row">
+        <label>Undo</label>
+        <div class="shortcut-input" id="shortcutUndo" tabindex="0" onclick="startRecording('undo')">Escape</div>
       </div>
     </div>
     <button class="close-btn" onclick="toggleSettings()">Done</button>
@@ -674,7 +681,8 @@ let settings = {
   mistakeLimit: 3,
   shortcuts: {
     toggle: { key: 'Tab', ctrl: false, shift: false, alt: false },
-    hint:   { key: 'h', ctrl: true, shift: false, alt: false }
+    hint:   { key: 'h', ctrl: false, shift: false, alt: false },
+    undo:   { key: 'Escape', ctrl: false, shift: false, alt: false }
   }
 };
 let recordingShortcut = null; // 'toggle' | 'hint' | null
@@ -725,7 +733,8 @@ function formatShortcut(sc) {
 
 function startRecording(which) {
   recordingShortcut = which;
-  const el = document.getElementById(which === 'toggle' ? 'shortcutToggle' : 'shortcutHint');
+  const elId = which === 'toggle' ? 'shortcutToggle' : which === 'hint' ? 'shortcutHint' : 'shortcutUndo';
+  const el = document.getElementById(elId);
   el.textContent = 'Press keys...';
   el.classList.add('recording');
   el.focus();
@@ -735,11 +744,13 @@ function stopRecording() {
   recordingShortcut = null;
   document.getElementById('shortcutToggle').classList.remove('recording');
   document.getElementById('shortcutHint').classList.remove('recording');
+  document.getElementById('shortcutUndo').classList.remove('recording');
 }
 
 function refreshShortcutDisplay() {
   document.getElementById('shortcutToggle').textContent = formatShortcut(settings.shortcuts.toggle);
   document.getElementById('shortcutHint').textContent = formatShortcut(settings.shortcuts.hint);
+  document.getElementById('shortcutUndo').textContent = formatShortcut(settings.shortcuts.undo);
 }
 
 function updateMistakeDisplay() {
@@ -1187,7 +1198,7 @@ function erase() {
 
 function undo() {
   if (pendingHint) { cancelHint(); return; }
-  if (history.length === 0) return;
+  if (history.length === 0) { selected = null; activeNumber = null; render(); return; }
   const action = history.pop();
   const {r, c} = action;
   if (action.type === 'note') {
@@ -1235,7 +1246,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (pendingHint) { cancelHint(); return; }
     if (document.getElementById('settingsOverlay').classList.contains('show')) { toggleSettings(); return; }
-    selected = null; activeNumber = null; render(); return;
   }
   // Configurable shortcuts
   if (matchesShortcut(e, settings.shortcuts.toggle)) {
@@ -1246,6 +1256,11 @@ document.addEventListener('keydown', e => {
   if (matchesShortcut(e, settings.shortcuts.hint)) {
     e.preventDefault();
     getHint();
+    return;
+  }
+  if (matchesShortcut(e, settings.shortcuts.undo)) {
+    e.preventDefault();
+    undo();
     return;
   }
   // Number keys: if nothing selected, activate that number (like clicking numpad)
@@ -1265,7 +1280,6 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'ArrowDown' && r < 8) { selected.r++; render(); }
   else if (e.key === 'ArrowLeft' && c > 0) { selected.c--; render(); }
   else if (e.key === 'ArrowRight' && c < 8) { selected.c++; render(); }
-  else if (e.key === 'z' && e.ctrlKey) { undo(); }
 });
 
 // ─── Alerts ────────────────────────────────────────────────────
